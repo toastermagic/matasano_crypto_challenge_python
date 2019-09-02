@@ -36,7 +36,7 @@ def frequency_table():
 
     return character_frequency_table
 
-def generate_results(message):
+def score(message):
 
     results = []
 
@@ -74,8 +74,8 @@ def generate_results(message):
 
     return results
 
-def max_score_result(results):
+def max_score_message(results):
     return max(results, key=lambda x:x['score'])
 
 # find most likely key for encrypted data
-#pprint(max_score_result(generate_results())["key"])
+#pprint(max_score_message(score(message))["key"])

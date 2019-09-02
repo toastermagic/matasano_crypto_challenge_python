@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import unittest
-import single_byte_xor
+from single_byte_xor import *
 from pprint import pprint
 
 class TestSet3(unittest.TestCase):
@@ -9,9 +9,9 @@ class TestSet3(unittest.TestCase):
     target = "Cooking MC's like a pound of bacon"
 
     def test_set2(self):
-        result = single_byte_xor.max_score_result(single_byte_xor.generate_results(self.message))
+        message = max_score_message(score(self.message))["message"]
 
-        self.assertEqual(self.target, result["message"])
+        self.assertEqual(self.target, message)
 
 if __name__ == '__main__':
     unittest.main()

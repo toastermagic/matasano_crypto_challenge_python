@@ -16,7 +16,7 @@ class TestSet4(unittest.TestCase):
         for line in self.data:
             line_no += 1
             line = line.strip()
-            result = max_score_result(generate_results(line))
+            result = max_score_message(score(line))
             result["line_no"] = line_no
             results.append(result)
 
