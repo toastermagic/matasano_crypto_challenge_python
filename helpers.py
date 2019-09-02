@@ -13,4 +13,4 @@ def repeating_xor(message, key):
 
     repeated_key = (key * message_length)[:message_length]
 
-    return bytes(x ^ y for x, y in zip(message, repeated_key))
+    return xor(message, repeated_key)
