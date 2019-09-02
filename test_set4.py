@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import unittest
-import single_byte_xor
+from single_byte_xor import *
 from pprint import pprint
 
 class TestSet4(unittest.TestCase):
@@ -16,7 +16,7 @@ class TestSet4(unittest.TestCase):
         for line in self.data:
             line_no += 1
             line = line.strip()
-            result = single_byte_xor.max_score_result(single_byte_xor.generate_results(line))
+            result = max_score_result(generate_results(line))
             result["line_no"] = line_no
             results.append(result)
 
