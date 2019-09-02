@@ -22,7 +22,7 @@ class TestSet4(unittest.TestCase):
 
         message_with_top_score = max(results, key=lambda x:x['score'])
 
-        #pprint(message_with_top_score)
+        # pprint(message_with_top_score)
         # => {'key': '5',
         #     'line_no': 171,
         #     'message': 'Now that the party is jumping\n',
