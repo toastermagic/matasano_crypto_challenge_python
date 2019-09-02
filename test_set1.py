@@ -9,18 +9,15 @@ class TestSet1(unittest.TestCase):
     target = "SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t"
 
     def test_set1(self):
-
-        # hex -> bytes (ascii)
-        s = binascii.unhexlify(self.hex)
-        #print(s)
+        hex_bytes = binascii.unhexlify(self.hex)
+        # print(hex_bytes)
         # => "I'm killing your brain like a poisonous mushroom"
 
-        # encode ascii to base64 bytes
-        b64_s = base64.b64encode(s)
-        #print(b64_s)
+        b64_bytes = base64.b64encode(hex_bytes)
+        # print(b64_bytes)
         # => b'SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t'
 
-        self.assertEqual(self.target, b64_s.decode("ASCII"))
+        self.assertEqual(self.target, b64_bytes.decode("ASCII"))
 
 if __name__ == '__main__':
     unittest.main()

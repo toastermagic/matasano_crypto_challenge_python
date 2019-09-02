@@ -15,9 +15,13 @@ class TestSet4(unittest.TestCase):
         # generate all permutations of each line xor'd with each ascii char
         for line in self.data:
             line_no += 1
+
             line = line.strip()
+
             result = max_score_message(score(line))
+
             result["line_no"] = line_no
+
             results.append(result)
 
         message_with_top_score = max(results, key=lambda x:x['score'])
