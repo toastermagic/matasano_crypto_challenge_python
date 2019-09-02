@@ -12,7 +12,7 @@ class TestSet4(unittest.TestCase):
         results = []
         line_no = 0
 
-        # generate all permutations of each line xor'd with each ascii char
+        # generate permutations of each line xor'd with each ascii char
         for line in self.data:
             line_no += 1
 
