@@ -12,11 +12,13 @@ class TestSet1(unittest.TestCase):
 
         # hex -> bytes (ascii)
         s = binascii.unhexlify(self.hex)
-        #print(s) # => "I'm killing your brain like a poisonous mushroom"
+        #print(s)
+        # => "I'm killing your brain like a poisonous mushroom"
 
         # encode ascii to base64 bytes
         b64_s = base64.b64encode(s)
-        #print(b64_s) # => b'SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t'
+        #print(b64_s)
+        # => b'SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t'
 
         self.assertEqual(self.target, b64_s.decode("ASCII"))
 
