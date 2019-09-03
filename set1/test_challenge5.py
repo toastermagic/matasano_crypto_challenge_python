@@ -6,7 +6,7 @@ sys.path.append('lib')
 import unittest
 from binascii import hexlify
 from pprint import pprint
-from helpers import *
+from xor import *
 
 class TestChallenge5(unittest.TestCase):
     message = "Burning 'em, if you ain't quick and nimble\nI go crazy when I hear a cymbal"

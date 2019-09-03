@@ -2,7 +2,7 @@
 
 import unittest
 from binascii import hexlify, unhexlify
-from helpers import *
+from xor import *
 
 class TestChallenge2(unittest.TestCase):
     buf_x = "1c0111001f010100061a024b53535009181c"

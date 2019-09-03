@@ -4,7 +4,7 @@ import sys
 import operator
 from binascii import hexlify, unhexlify
 from pprint import pprint
-from helpers import *
+from xor import *
 
 def frequency_table():
     characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz .,!'?"
