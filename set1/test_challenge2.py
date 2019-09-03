@@ -3,7 +3,7 @@
 import unittest
 from helpers import *
 
-class TestSet2(unittest.TestCase):
+class TestChallenge2(unittest.TestCase):
     buf_x = "1c0111001f010100061a024b53535009181c"
     buf_y = "686974207468652062756c6c277320657965"
 
@@ -13,7 +13,7 @@ class TestSet2(unittest.TestCase):
     buf_y_bytes = binascii.unhexlify(buf_y)
 
 
-    def test_set2(self):
+    def test_challenge2(self):
         # encrypted text in plain english
         # print(self.buf_x_bytes)
         # => b'\x1c\x01\x11\x00\x1f\x01\x01\x00\x06\x1a\x02KSSP\t\x18\x1c'

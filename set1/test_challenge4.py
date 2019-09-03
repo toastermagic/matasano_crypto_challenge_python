@@ -4,11 +4,11 @@ import unittest
 from single_byte_xor import *
 from pprint import pprint
 
-class TestSet4(unittest.TestCase):
+class TestChallenge4(unittest.TestCase):
     data = open("data/4.txt", encoding="ISO-8859-1")
     target = "Now that the party is jumping\n"
 
-    def test_set4(self):
+    def test_challenge4(self):
         results = []
         line_no = 0
 
