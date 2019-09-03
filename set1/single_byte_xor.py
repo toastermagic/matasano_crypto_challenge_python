@@ -37,25 +37,23 @@ def frequency_table():
     return character_frequency_table
 
 def score(message):
-
     results = []
 
     # ASCII range
     for key in range(256):
-        #print("key: " + chr(key))
+        # print("key: " + chr(key))
 
         # create a string of characters in bytes to xor message against
         xor_buffer = (chr(key) * len(message)).encode("ISO-8859-1")
 
         xor_result = xor(unhexlify(message), xor_buffer)
 
-        #print("input:   " + message)
-        #print("output:  " + xor_buffer.decode("ISO-8859-1"))
-        #print("target:  " + hexlify(target.encode("ISO-8859-1")).decode("ISO-8859-1"))
-        #print("xor hex: " + xor_result.hex())
-        #print("xor:     " + xor_result.decode("ISO-8859-1"))
-
-        #print()
+        # print("input:   " + message)
+        # print("output:  " + xor_buffer.decode("ISO-8859-1"))
+        # print("target:  " + hexlify(target.encode("ISO-8859-1")).decode("ISO-8859-1"))
+        # print("xor hex: " + xor_result.hex())
+        # print("xor:     " + xor_result.decode("ISO-8859-1"))
+        # print()
 
         # calculate score based on frequency of characters in sentence
         score = 0
@@ -65,12 +63,11 @@ def score(message):
             except:
                 pass
 
-        result = {}
-        result["score"] = score
-        result["message"] = xor_result.decode("ISO-8859-1")
-        result["key"] = chr(key)
-
-        results.append(result)
+        results.append({
+            "score":   score,
+            "message": xor_result.decode("ISO-8859-1"),
+            "key":     chr(key),
+        })
 
     return results
 
@@ -78,4 +75,4 @@ def max_score_message(results):
     return max(results, key=lambda x:x['score'])
 
 # find most likely key for encrypted data
-#pprint(max_score_message(score(message))["key"])
+# pprint(max_score_message(score(message))["key"])
