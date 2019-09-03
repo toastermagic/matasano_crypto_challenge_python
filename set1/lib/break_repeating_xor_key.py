@@ -47,11 +47,20 @@ def transpose(bytes, blocksize):
 
     blocks = len(block_set)
 
+    eof = False
+
     for index in range(blocks-1):
         collection = []
 
         for block in block_set:
-            collection.append(chr(block[index]))
+            try:
+                collection.append(block[index])
+            except:
+                eof = True
+                break
+
+        if eof:
+            break
 
         transposed_blocks.append(collection)
 
