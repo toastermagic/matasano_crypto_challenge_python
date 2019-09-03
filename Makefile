@@ -1,4 +1,6 @@
+default: test
+
 SUBDIRS=$(shell ls -d */)
 
-all:
+test:
 	@for dir in $(SUBDIRS); do make -C $$dir; done

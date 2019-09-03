@@ -1,6 +1,6 @@
-all:
-	@./test_challenge1.py -v
-	@./test_challenge2.py -v
-	@./test_challenge3.py -v
-	@./test_challenge4.py -v
-	@./test_challenge5.py -v
+default: test
+
+TESTS=$(shell ls test_*.py)
+
+test:
+	@for test in $(TESTS); do ./$$test; done
