@@ -4,9 +4,9 @@ import sys
 sys.path.append('lib')
 
 import unittest
-import results
 from pprint import pprint
 from single_byte_xor import *
+from results import *
 
 class TestChallenge4(unittest.TestCase):
     data = open("data/4.txt", encoding="ISO-8859-1")
@@ -22,13 +22,13 @@ class TestChallenge4(unittest.TestCase):
 
             line = line.strip()
 
-            result = results.max(score(line), "score")
+            result = find_max(score(line), "score")
 
             result["line_no"] = line_no
 
             results.append(result)
 
-        message_with_top_score = max(results, key=lambda x:x['score'])
+        message_with_top_score = find_max(results, "score")
 
         # pprint(message_with_top_score)
         # => {'key': '5',

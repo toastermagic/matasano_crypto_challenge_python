@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 
+import sys
+sys.path.append('lib')
+
 import unittest
 from binascii import hexlify, unhexlify
 from xor import *

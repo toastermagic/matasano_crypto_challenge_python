@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-def max(dict, key):
-    return max(dict, key=lambda x:x[key])
+def find_max(data, key):
+    return max(data, key=lambda x:x[key])
 
-def min(dict, key):
-    return max(dict, key=lambda x:x[key])
+def find_min(data, key):
+    return min(data, key=lambda x:x[key])

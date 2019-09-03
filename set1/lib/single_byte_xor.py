@@ -2,10 +2,10 @@
 
 import sys
 import operator
-import results
 from binascii import hexlify, unhexlify
 from pprint import pprint
 from xor import *
+from results import *
 
 def frequency_table():
     characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz .,!'?"
@@ -72,8 +72,5 @@ def score(message):
 
     return results
 
-def max_score_message(results):
-    return max(results, key=lambda x:x['score'])
-
 # find most likely key for encrypted data
-# pprint(results.max(score(message), "score")["key"])
+# pprint(find_max(score(message), "score")["key"])
