@@ -39,3 +39,20 @@ def minimum_hamming_distances(bytes, keysize_range):
         })
 
     return results
+
+def transpose(bytes, blocksize):
+    block_set = list(grouper(bytes, blocksize, fillvalue=0))
+
+    transposed_blocks = []
+
+    blocks = len(block_set)
+
+    for index in range(blocks-1):
+        collection = []
+
+        for block in block_set:
+            collection.append(chr(block[index]))
+
+        transposed_blocks.append(collection)
+
+    return transposed_blocks
