@@ -5,3 +5,6 @@ def find_max(data, key):
 
 def find_min(data, key):
     return min(data, key=lambda x:x[key])
+
+def sort(data, key):
+    return sorted(data, key=lambda x:x[key])
