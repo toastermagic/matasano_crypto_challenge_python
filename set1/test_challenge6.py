@@ -8,10 +8,12 @@ from binascii import hexlify
 from pprint import pprint
 from xor import *
 from break_repeating_xor_key import *
+from detect_single_character_xor import *
 from results import *
 
 class TestChallenge6(unittest.TestCase):
-    data = open("data/6.txt", encoding="ISO-8859-1").read()
+    with open("data/6.txt", encoding="ISO-8859-1") as file: data = file.read()
+
     encrypted_bytes = b64decode(data)
 
     def test_hamming_distance(self):
@@ -36,8 +38,36 @@ class TestChallenge6(unittest.TestCase):
         # number of blocks: 99
         # padding: 24 
 
-        # block size calculated by prior test..
-        print(transpose(self.encrypted_bytes, 29))
+        # block size calculated by prior hamming distance test..
+        blocks = transpose(self.encrypted_bytes, 29)
+
+        collection = []
+
+        for block in blocks:
+            # FIXME: score() should take bytes not hex
+            collection.append(find_max(score(hexlify(bytes(block))), "score"))
+
+        #print(collection)
+
+        key = ""
+
+        for data in collection:
+            key += data["key"]
+
+        decrypted_message = repeating_xor(self.encrypted_bytes, key.encode("ASCII"))
+
+        #print(key)
+        #print(decrypted_message)
+        #print(decrypted_message.decode("ASCII"))
+
+        with open("data/6-decrypted.txt", encoding="ISO-8859-1") as file: target = file.read()
+
+        #print(len(decrypted_message))
+        #print(len(target))
+
+        #print(target)
+
+        self.assertEqual(decrypted_message.decode("ASCII"), target)
 
 if __name__ == '__main__':
     unittest.main()
