@@ -21,6 +21,7 @@ class TestChallenge6(unittest.TestCase):
         self.assertEqual(hamming_distance(b"this is a test", b"wokka wokka!!!"), 37)
 
     def test_minimum_hamming_distances(self):
+        # NOTE: could potentially calculate hamming distance range from cipher text length..
         results = minimum_hamming_distances(self.encrypted_bytes, range(2,41))
 
         self.assertEqual(find_min(results, "normalized_hamming_distance")["keysize"], 29)
