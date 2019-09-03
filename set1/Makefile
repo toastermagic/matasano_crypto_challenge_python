@@ -3,4 +3,4 @@ default: test
 TESTS=$(shell ls test_*.py)
 
 test:
-	@for test in $(TESTS); do ./$$test; done
+	@for test in $(TESTS); do ./$$test -v; done
