@@ -12,7 +12,8 @@ from detect_single_character_xor import *
 from results import *
 
 class TestChallenge6(unittest.TestCase):
-    with open("data/6.txt", encoding="ISO-8859-1") as file: data = file.read()
+    with open("data/6.txt", encoding="ISO-8859-1") as file:
+        data = file.read()
 
     encrypted_bytes = b64decode(data)
 
@@ -21,8 +22,6 @@ class TestChallenge6(unittest.TestCase):
 
     def test_minimum_hamming_distances(self):
         results = minimum_hamming_distances(self.encrypted_bytes, range(2,41))
-
-        # pprint(sort(results, "normalized_hamming_distance"))
 
         self.assertEqual(find_min(results, "normalized_hamming_distance")["keysize"], 29)
 
@@ -47,25 +46,14 @@ class TestChallenge6(unittest.TestCase):
             # FIXME: score() should take bytes not hex
             collection.append(find_max(score(hexlify(bytes(block))), "score"))
 
-        #print(collection)
-
         key = ""
-
         for data in collection:
             key += data["key"]
 
         decrypted_message = repeating_xor(self.encrypted_bytes, key.encode("ASCII"))
 
-        #print(key)
-        #print(decrypted_message)
-        #print(decrypted_message.decode("ASCII"))
-
-        with open("data/6-decrypted.txt", encoding="ISO-8859-1") as file: target = file.read()
-
-        #print(len(decrypted_message))
-        #print(len(target))
-
-        #print(target)
+        with open("data/6-decrypted.txt", encoding="ISO-8859-1") as file:
+            target = file.read()
 
         self.assertEqual(decrypted_message.decode("ASCII"), target)
 
