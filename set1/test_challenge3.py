@@ -1,8 +1,11 @@
 #!/usr/bin/env python
 
+import sys
+sys.path.append('lib')
+
 import unittest
-from single_byte_xor import *
 from pprint import pprint
+from single_byte_xor import *
 
 class TestChallenge3(unittest.TestCase):
     message = "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736"

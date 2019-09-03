@@ -1,9 +1,12 @@
 #!/usr/bin/env python
 
+import sys
+sys.path.append('lib')
+
 import unittest
 from binascii import hexlify
-from helpers import *
 from pprint import pprint
+from helpers import *
 
 class TestChallenge5(unittest.TestCase):
     message = "Burning 'em, if you ain't quick and nimble\nI go crazy when I hear a cymbal"

@@ -1,8 +1,11 @@
 #!/usr/bin/env python
 
+import sys
+sys.path.append('lib')
+
 import unittest
-from single_byte_xor import *
 from pprint import pprint
+from single_byte_xor import *
 
 class TestChallenge4(unittest.TestCase):
     data = open("data/4.txt", encoding="ISO-8859-1")
