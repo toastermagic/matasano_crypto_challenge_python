@@ -17,7 +17,7 @@ class TestChallenge6(unittest.TestCase):
     def test_hamming_distance(self):
         self.assertEqual(hamming_distance(b"this is a test", b"wokka wokka!!!"), 37)
 
-    def test_minimum_hamming_distance(self):
+    def test_minimum_hamming_distances(self):
         results = minimum_hamming_distances(self.encrypted_bytes, range(2,41))
 
         # pprint(sort(results, "normalized_hamming_distance"))
@@ -25,16 +25,19 @@ class TestChallenge6(unittest.TestCase):
         self.assertEqual(find_min(results, "normalized_hamming_distance")["keysize"], 29)
 
     def test_transpose(self):
-        bytes = b"abcdefghijkl"
+        bytes = "abcdefghijkl"
         target = [['a', 'd', 'g', 'j'], ['b', 'e', 'h', 'k'], ['c', 'f', 'i', 'l']]
 
         self.assertEqual(transpose(bytes, 3), target)
 
-
     def test_challenge6(self):
+        # number of bytes: 2871
+        # block size: 29
+        # number of blocks: 99
+        # padding: 24 
+
         # block size calculated by prior test..
-        transpose(self.encrypted_bytes, 29)
-        True
+        print(transpose(self.encrypted_bytes, 29))
 
 if __name__ == '__main__':
     unittest.main()
