@@ -4,3 +4,6 @@ SUBDIRS=$(shell ls -d */)
 
 test:
 	@for dir in $(SUBDIRS); do make -C $$dir; done
+
+depends:
+	@pip install iteration_utilities
