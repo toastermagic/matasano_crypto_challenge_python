@@ -2,6 +2,7 @@
 
 import sys
 import operator
+import results
 from binascii import hexlify, unhexlify
 from pprint import pprint
 from xor import *
@@ -75,4 +76,4 @@ def max_score_message(results):
     return max(results, key=lambda x:x['score'])
 
 # find most likely key for encrypted data
-# pprint(max_score_message(score(message))["key"])
+# pprint(results.max(score(message), "score")["key"])

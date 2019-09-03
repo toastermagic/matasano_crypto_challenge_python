@@ -4,6 +4,7 @@ import sys
 sys.path.append('lib')
 
 import unittest
+import results
 from pprint import pprint
 from single_byte_xor import *
 
@@ -12,7 +13,7 @@ class TestChallenge3(unittest.TestCase):
     target = "Cooking MC's like a pound of bacon"
 
     def test_challenge2(self):
-        message = max_score_message(score(self.message))["message"]
+        message = results.max(score(self.message), "score")["message"]
 
         self.assertEqual(self.target, message)
 

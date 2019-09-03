@@ -4,6 +4,7 @@ import sys
 sys.path.append('lib')
 
 import unittest
+import results
 from pprint import pprint
 from single_byte_xor import *
 
@@ -21,7 +22,7 @@ class TestChallenge4(unittest.TestCase):
 
             line = line.strip()
 
-            result = max_score_message(score(line))
+            result = results.max(score(line), "score")
 
             result["line_no"] = line_no
 
