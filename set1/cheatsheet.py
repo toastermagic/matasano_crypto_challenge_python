@@ -21,14 +21,14 @@ print()
 
 # NOTE: prefer binascii functions since they always returns bytes
 
-import binascii
+from binascii import hexlify, unhexlify
 
 print("# convert bytes to hex (input: b'test')")
-print(binascii.hexlify(b"test")) # => b"74657374"
+print(hexlify(b"test")) # => b"74657374"
 print()
 
 print("# convert ascii hex to bytes (input: '74657374')")
-print(binascii.unhexlify("74657374")) # => b"test"
+print(unhexlify("74657374")) # => b"test"
 print()
 
 print("# convert bytes to ascii (input: b'test')")

@@ -2,7 +2,7 @@
 
 import sys
 import operator
-import binascii
+from binascii import hexlify, unhexlify
 from pprint import pprint
 from helpers import *
 
@@ -47,11 +47,11 @@ def score(message):
         # create a string of characters in bytes to xor message against
         xor_buffer = (chr(key) * len(message)).encode("ISO-8859-1")
 
-        xor_result = xor(binascii.unhexlify(message), xor_buffer)
+        xor_result = xor(unhexlify(message), xor_buffer)
 
         #print("input:   " + message)
         #print("output:  " + xor_buffer.decode("ISO-8859-1"))
-        #print("target:  " + binascii.hexlify(target.encode("ISO-8859-1")).decode("ISO-8859-1"))
+        #print("target:  " + hexlify(target.encode("ISO-8859-1")).decode("ISO-8859-1"))
         #print("xor hex: " + xor_result.hex())
         #print("xor:     " + xor_result.decode("ISO-8859-1"))
 

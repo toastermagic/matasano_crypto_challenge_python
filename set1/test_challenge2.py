@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import unittest
+from binascii import hexlify, unhexlify
 from helpers import *
 
 class TestChallenge2(unittest.TestCase):
@@ -9,8 +10,8 @@ class TestChallenge2(unittest.TestCase):
 
     target = "746865206b696420646f6e277420706c6179"
 
-    buf_x_bytes = binascii.unhexlify(buf_x)
-    buf_y_bytes = binascii.unhexlify(buf_y)
+    buf_x_bytes = unhexlify(buf_x)
+    buf_y_bytes = unhexlify(buf_y)
 
 
     def test_challenge2(self):
@@ -23,7 +24,7 @@ class TestChallenge2(unittest.TestCase):
         # => b"hit the bull's eye"
 
         # target string in plain english
-        # print(binascii.unhexlify(self.target))
+        # print(unhexlify(self.target))
         # => b"the kid don't play" 
 
         xor_result = xor(self.buf_x_bytes, self.buf_y_bytes)
@@ -33,7 +34,7 @@ class TestChallenge2(unittest.TestCase):
         # => b"the kid don't play"
 
         # target is plain ascii so convert result for testing..
-        self.assertEqual(self.target, binascii.hexlify(xor_result).decode("ASCII"))
+        self.assertEqual(self.target, hexlify(xor_result).decode("ASCII"))
 
 if __name__ == '__main__':
     unittest.main()
