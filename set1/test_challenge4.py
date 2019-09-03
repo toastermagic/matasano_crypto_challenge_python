@@ -6,6 +6,7 @@ sys.path.append('lib')
 import unittest
 from pprint import pprint
 from single_byte_xor import *
+from detect_single_character_xor import *
 from results import *
 
 class TestChallenge4(unittest.TestCase):
@@ -13,28 +14,9 @@ class TestChallenge4(unittest.TestCase):
     target = "Now that the party is jumping\n"
 
     def test_challenge4(self):
-        results = []
-        line_no = 0
-
-        # generate permutations of each line xor'd with each ascii char
-        for line in self.data:
-            line_no += 1
-
-            line = line.strip()
-
-            result = find_max(score(line), "score")
-
-            result["line_no"] = line_no
-
-            results.append(result)
+        results = detect_single_character_xor(self.data)
 
         message_with_top_score = find_max(results, "score")
-
-        # pprint(message_with_top_score)
-        # => {'key': '5',
-        #     'line_no': 171,
-        #     'message': 'Now that the party is jumping\n',
-        #     'score': 261.13899999999995}
 
         self.assertEqual(self.target, message_with_top_score["message"])
 
