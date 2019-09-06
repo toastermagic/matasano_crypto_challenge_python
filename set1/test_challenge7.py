@@ -8,7 +8,7 @@ from pprint import pprint
 from Crypto.Cipher import AES
 from base64 import b64decode
 
-class TestChallenge6(unittest.TestCase):
+class TestChallenge7(unittest.TestCase):
     with open("data/7.txt", encoding="ISO-8859-1") as file:
         data = b64decode(file.read())
 
