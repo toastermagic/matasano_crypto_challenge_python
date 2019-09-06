@@ -1,12 +1,29 @@
 #!/usr/bin/env python
 
-def pad(bytes, blocksize):
-    if len(bytes) <= blocksize:
-        # no padding necessary
-        if (len(bytes) % blocksize == 0):
-            return bytes
+# PKCS #7 RFC: https://tools.ietf.org/html/rfc2315#section-10.3
+def pad(message, block_length):
+    message_length = len(message)
 
-        padding_byte = blocksize - len(bytes)
+    if block_length > 255:
+        raise Exception("maximum block size is 255!")
 
-        if padding_byte == 0:
-            padding_byte = blocksize
+    # padding unnecessary since block length matches number of bytes
+    if message_length == block_length:
+        return message
+
+    # padding unnecessary since message is divisible by block length
+    if message_length % block_length == 0:
+        return message
+
+    # message is larger than block length, so workout remainder to use as padding
+    if message_length > block_length:
+        padding_byte = block_length - (message_length % block_length)
+
+    # message is shorter than block length so calculate extra padding to equalize
+    if message_length < block_length:
+        padding_byte = block_length - message_length
+
+    padding = bytes([padding_byte]) * padding_byte
+
+    return message + padding
+
