@@ -25,8 +25,8 @@ class TestChallenge8(unittest.TestCase):
         likely_ecb_texts = []
         line_number = 0
 
-        # for each line in the file, work out how many repeated chunks are in the file.
-        # lots of repeated chunks means its likely ecb mode..
+        # work out how many repeated chunks each entry has.
+        # lots of repeated chunks means its likely ECB
         for line in self.data:
             line_number += 1
 
