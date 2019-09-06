@@ -13,7 +13,12 @@ class TestChallenge8(unittest.TestCase):
     with open("data/8.txt", encoding="ISO-8859-1") as file:
         data = file.readlines()
 
-    target = "d880619740a8a19b7840a8a31c810a3d08649af70dc06f4fd5d2d69c744cd283e2dd052f6b641dbf9d11b0348542bb5708649af70dc06f4fd5d2d69c744cd2839475c9dfdbc1d46597949d9c7e82bf5a08649af70dc06f4fd5d2d69c744cd28397a93eab8d6aecd566489154789a6b0308649af70dc06f4fd5d2d69c744cd283d403180c98c8f6db1f2a3f9c4040deb0ab51b29933f2c123c58386b06fba186a\n"
+    target = "d880619740a8a19b7840a8a31c810a3d08649af70dc06f4fd5d2d69c74" \
+            + "4cd283e2dd052f6b641dbf9d11b0348542bb5708649af70dc06f4fd5d2" \
+            + "d69c744cd2839475c9dfdbc1d46597949d9c7e82bf5a08649af70dc06f" \
+            + "4fd5d2d69c744cd28397a93eab8d6aecd566489154789a6b0308649af7" \
+            + "0dc06f4fd5d2d69c744cd283d403180c98c8f6db1f2a3f9c4040deb0ab" \
+            + "51b29933f2c123c58386b06fba186a\n"
 
     def test_set8(self):
         likely_ecb_texts = []
@@ -46,9 +51,9 @@ class TestChallenge8(unittest.TestCase):
 
         #pprint(likely_ecb_texts)
 
-        self.assertEqual(likely_ecb_data[0]['cipher_text'], self.target)
-        self.assertEqual(likely_ecb_data[0]['line_number'], 133)
-        self.assertEqual(likely_ecb_data[0]['repeated_chunk_total'], 3)
+        self.assertEqual(likely_ecb_texts[0]['cipher_text'], self.target)
+        self.assertEqual(likely_ecb_texts[0]['line_number'], 133)
+        self.assertEqual(likely_ecb_texts[0]['repeated_chunk_total'], 3)
 
 if __name__ == '__main__':
     unittest.main()
