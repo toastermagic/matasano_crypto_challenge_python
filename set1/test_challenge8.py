@@ -8,6 +8,7 @@ from pprint import pprint
 from Crypto.Cipher import AES
 from base64 import b64decode
 from iteration_utilities import grouper
+from results import *
 
 class TestChallenge8(unittest.TestCase):
     with open("data/8.txt", encoding="ISO-8859-1") as file:
@@ -49,11 +50,11 @@ class TestChallenge8(unittest.TestCase):
                 "repeated_chunk_total": repeated_chunk_total
             })
 
-        #pprint(likely_ecb_texts)
+        most_likely_ecb_text = find_max(likely_ecb_texts, "repeated_chunk_total")
 
-        self.assertEqual(likely_ecb_texts[0]['cipher_text'], self.target)
-        self.assertEqual(likely_ecb_texts[0]['line_number'], 133)
-        self.assertEqual(likely_ecb_texts[0]['repeated_chunk_total'], 3)
+        self.assertEqual(most_likely_ecb_text['cipher_text'], self.target)
+        self.assertEqual(most_likely_ecb_text['line_number'], 133)
+        self.assertEqual(most_likely_ecb_text['repeated_chunk_total'], 3)
 
 if __name__ == '__main__':
     unittest.main()
