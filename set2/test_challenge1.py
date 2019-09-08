@@ -13,8 +13,6 @@
 #
 # The particulars of this algorithm are easy to find online.
 
-
-
 import sys
 sys.path.append('../lib')
 
@@ -22,13 +20,15 @@ import unittest
 from padding import *
 
 class TestChallenge1(unittest.TestCase):
-    def test_challenge1(self):
+    def test_pad(self):
         self.assertEqual(pad(b"abcd", 3), b"abcd\x02\x02")
         self.assertEqual(pad(b"abcd", 4), b"abcd\x04\x04\x04\x04")
         self.assertEqual(pad(b"abcd", 5), b"abcd\x01")
         self.assertEqual(pad(b"abcd", 8), b"abcd\x04\x04\x04\x04")
-        self.assertEqual(pad(b"YELLOW SUBMARINE", 20), b"YELLOW SUBMARINE\x04\x04\x04\x04")
         self.assertRaises(Exception, pad, b"abcd", 256)
+
+    def test_challenge1(self):
+        self.assertEqual(pad(b"YELLOW SUBMARINE", 20), b"YELLOW SUBMARINE\x04\x04\x04\x04")
 
 if __name__ == '__main__':
     unittest.main()
