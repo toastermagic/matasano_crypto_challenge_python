@@ -29,25 +29,19 @@ class TestChallenge2(unittest.TestCase):
     with open("../set2/data/10.txt", encoding="ISO-8859-1") as file:
         data = file.read()
 
-    #def test_decrypt_ecb_cbc(self):
-    #    # 21 bytes
-    #    text = b"abcdefghijklmnopqrstu"
+    def test_decrypt_ecb_cbc(self):
+        text = b"abcdefghijklmnopqrstu"
+        iv  = b"iviviviviviviviv"
+        key = b"xxxxxxxxxxxxxxxx"
 
-    #    # 16 bytes
-    #    iv  = b"iviviviviviviviv"
-    #    key = b"xxxxxxxxxxxxxxxx"
+        cipher_text = encrypt_ecb_cbc(text, key, iv)
 
-    #    cipher_text = encrypt_ecb_cbc(text, key, iv)
-
-    #    self.assertEqual(text, (decrypt_ecb_cbc(cipher_text, key, iv)))
+        self.assertEqual(text, (decrypt_ecb_cbc(cipher_text, key, iv)))
 
     def test_challenge2(self):
         key = b"YELLOW SUBMARINE"
         iv = b"\x00" * 16
         print(decrypt_ecb_cbc(self.data.encode("ASCII"), key, iv).decode("ASCII"))
-
-    #    self.assertEqual(pad(b"YELLOW SUBMARINE", 20), b"YELLOW SUBMARINE\x04\x04\x04\x04")
-    #    #self.assertRaises(Exception, pad, b"abcd", 256)
 
 if __name__ == '__main__':
     unittest.main()

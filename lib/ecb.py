@@ -16,12 +16,10 @@ def decrypt_ecb_cbc(cipher_text, key, iv):
     last_block   = iv
     plain_blocks = []
 
-    # the blocks seem to be backwards!
     for block in blocks:
         decrypted_block = cipher.decrypt(bytes(block))
         plain_block = xor(decrypted_block, last_block)
         plain_blocks.append(plain_block)
-        print(last_block)
         last_block = plain_block
 
     # TODO: remove padding - should be 11 bytes of \x0B
