@@ -24,29 +24,3 @@ def pad(message, block_length):
     padding = bytes([padding_byte]) * padding_byte
 
     return message + padding
-
-    #message_size = len(message)
-
-    ##if message_size > block_size:
-    ##    raise Exception("padding block size must be greater than message length")
-
-    ##if block_size > 255:
-    ##    raise Exception("maximum block size is 255")
-
-    ## in the case that the block length matches the message length
-    ## or that the message length is divisible by the block length then
-    ## apply a block length worth of padding so the decryption process
-    ## can still detect some padding bytes
-    #if message_size == block_size:
-    #    padding_byte = block_size
-
-    #if message_size % block_size == 0:
-
-    ## message is larger than block length, so workout remainder to use as padding
-    #if message_size > block_size:
-    #    padding_byte = block_size - (message_size % block_size)
-
-    #padding = bytes([padding_byte]) * padding_byte
-
-    #return message + padding
-
