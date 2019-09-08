@@ -39,3 +39,5 @@ print("# convert ascii to bytes (input: 'test')")
 print('test'.encode("ASCII")) # => b"test"
 print()
 
+print("# convert byte array to bytes: (input: [10, 10, 10])")
+print(bytearray([65, 66, 67])) #= b"ABC"
