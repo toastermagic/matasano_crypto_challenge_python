@@ -12,8 +12,8 @@ def pad(message, block_length):
     if message_length == block_length or message_length % block_length == 0:
         padding_byte = block_length
 
-    # FIXME
-    # message is larger than block length, so workout remainder to use as padding
+    # message is longer than blocksize so message must be padded to multiple
+    # of the block size
     if message_length > block_length:
         padding_byte = block_length - (message_length % block_length)
 
