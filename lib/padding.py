@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+from random import randint
+
 def pad_strip(message):
     padding_length = message[-1]
     return message[:- padding_length]
@@ -28,3 +30,15 @@ def pad(message, block_length):
     padding = bytes([padding_byte]) * padding_byte
 
     return message + padding
+
+def pad_random(message, padding_length, placement):
+    for i in range(0, padding_length):
+        random_byte = bytes([randint(1, 254)])
+        if placement == "prepend":
+            message = random_byte + message
+
+        if placement == "append":
+            message = message + random_byte
+
+    return message
+
