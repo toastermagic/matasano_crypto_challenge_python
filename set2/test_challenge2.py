@@ -22,12 +22,16 @@ import sys
 sys.path.append('../lib')
 
 import unittest
+from base64 import b64decode
 from padding import *
 from ecb import *
 
 class TestChallenge2(unittest.TestCase):
     with open("../set2/data/10.txt", encoding="ISO-8859-1") as file:
         data = file.read()
+
+    with open("../set2/data/10-decrypted.txt", encoding="ISO-8859-1") as file:
+        target = file.read()
 
     def test_decrypt_ecb_cbc(self):
         text = b"abcdefghijklmnopqrstu"
@@ -39,10 +43,9 @@ class TestChallenge2(unittest.TestCase):
         self.assertEqual(text, (decrypt_ecb_cbc(cipher_text, key, iv)))
 
     def test_challenge2(self):
-        True
-        #key = b"YELLOW SUBMARINE"
-        #iv = b"\x00" * 16
-        #print(decrypt_ecb_cbc(self.data.encode("ASCII"), key, iv).decode("ASCII"))
+        key = b"YELLOW SUBMARINE"
+        iv = b"\x00" * 16
+        self.assertEqual(self.target, decrypt_ecb_cbc(b64decode(self.data), key, iv).decode("ASCII"))
 
 if __name__ == '__main__':
     unittest.main()
