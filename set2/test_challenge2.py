@@ -29,8 +29,6 @@ class TestChallenge2(unittest.TestCase):
     with open("../set2/data/10.txt", encoding="ISO-8859-1") as file:
         data = file.read()
 
-    # first block decrypts properly
-    # second block does not
     def test_decrypt_ecb_cbc(self):
         text = b"abcdefghijklmnopqrstu"
         iv  = b"iviviviviviviviv"
