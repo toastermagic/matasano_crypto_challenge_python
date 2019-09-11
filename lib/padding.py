@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+def pad_strip(message):
+    padding_length = message[-1]
+    return message[:- padding_length]
+
 # PKCS #7 RFC: https://tools.ietf.org/html/rfc2315#section-10.3
 def pad(message, block_length):
     message_length = len(message)

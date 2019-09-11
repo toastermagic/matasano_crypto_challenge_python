@@ -18,13 +18,12 @@ def decrypt_ecb_cbc(cipher_text, key, iv):
 
     for block in blocks:
         decrypted_block = cipher.decrypt(bytes(block))
-        plain_block = xor(decrypted_block, last_block)
+        plain_block = xor(last_block, decrypted_block)
         plain_blocks.append(plain_block)
-        last_block = plain_block
+        last_block = block
 
-    # TODO: remove padding - should be 11 bytes of \x0B
-
-    return b"".join(plain_blocks)
+    plain_text = pad_strip(b"".join(plain_blocks))
+    return plain_text
 
 def encrypt_ecb_cbc(message, key, iv):
     block_length = len(key)
