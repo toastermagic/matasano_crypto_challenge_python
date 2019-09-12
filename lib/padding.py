@@ -33,7 +33,7 @@ def pad(message, block_length):
 
 def pad_random(message, padding_length, placement):
     for i in range(0, padding_length):
-        random_byte = bytes([randint(1, 254)])
+        random_byte = bytes([randint(0, 255)])
         if placement == "prepend":
             message = random_byte + message
 
