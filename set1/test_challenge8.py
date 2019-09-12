@@ -34,6 +34,8 @@ class TestChallenge8(unittest.TestCase):
             + "51b29933f2c123c58386b06fba186a\n"
 
     def test_set8(self):
+        # FIXME: replace with detect_ecb function 
+        #        remember input needs to be array of bytes data..(non-b64 encoded)
         likely_ecb_texts = []
         line_number = 0
 

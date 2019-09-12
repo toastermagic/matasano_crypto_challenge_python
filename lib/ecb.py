@@ -4,6 +4,7 @@ from Crypto.Cipher import AES
 from padding import *
 from iteration_utilities import grouper
 from xor import xor
+from results import *
 
 def decrypt_ecb_cbc(cipher_text, key, iv):
     block_length = len(key)
@@ -44,3 +45,34 @@ def encrypt_ecb_cbc(message, key, iv):
         last_block = encrypted_block
 
     return b"".join(encrypted_blocks)
+
+def detect_ecb(collection, block_size):
+    likely_ecb_texts = []
+    index = 0
+
+    # work out how many repeated chunks each entry has.
+    # lots of repeated chunks means its likely ECB
+    for data in collection:
+        index += 1
+
+        chunks = {}
+
+        for chunk in list(grouper(data, block_size)):
+            if tuple(chunk) in chunks.keys():
+                chunks[tuple(chunk)] += 1
+            else:
+                chunks[tuple(chunk)] = 0
+
+        repeated_chunk_total = sum(chunks.values())
+
+        if repeated_chunk_total == 0:
+            continue
+
+        likely_ecb_texts.append({
+            "block_size": block_size,
+            "index": index,
+            "cipher_text": data,
+            "repeated_chunk_total": repeated_chunk_total
+        })
+
+    return likely_ecb_texts
