@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+import sys
+import time
 from Crypto.Cipher import AES
 from padding import *
 from iteration_utilities import grouper
@@ -78,9 +80,16 @@ def detect_ecb(collection, block_size):
 
     return likely_ecb_texts
 
-def break_ecb(oracle_context, position, known_text: bytes, reference_cipher_text, broken_bytes, block, block_size):
+def break_ecb(oracle_context, position, known_text: bytes,
+              reference_cipher_text,broken_bytes, block, block_size, display_output = False):
     for char in range(0, 127):
         prefix = known_text + broken_bytes + chr(char).encode("ASCII")
+
+        if (char > 32) and (display_output):
+            last_bytes = len(prefix) - 16
+            prompt = "  decrypting: "
+            print(prompt + prefix[last_bytes:].decode("ASCII").encode("unicode_escape").decode("ASCII") + "     ", end="\r")
+            time.sleep(0.0005)
 
         encrypted_data = encryption_oracle(oracle_context, prefix)
 
@@ -91,7 +100,7 @@ def break_ecb(oracle_context, position, known_text: bytes, reference_cipher_text
 
     return b""
 
-def break_ecb_byte_by_byte(oracle_context):
+def break_ecb_byte_by_byte(oracle_context, display_output = False):
     block_size = 16
 
     broken_bytes = b""
@@ -106,6 +115,6 @@ def break_ecb_byte_by_byte(oracle_context):
             reference_cipher_text = encryption_oracle(oracle_context, known_text)
 
             broken_bytes += break_ecb(oracle_context, position, known_text,
-                                      reference_cipher_text, broken_bytes, block, block_size)
+                                      reference_cipher_text, broken_bytes, block, block_size, display_output)
 
     return broken_bytes
