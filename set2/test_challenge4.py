@@ -86,7 +86,7 @@ class TestChallenge4(unittest.TestCase):
         True
 
     def test_challenge4(self):
-        plain_text = break_ecb_byte_by_byte(self.oracle_context)
+        plain_text = pad_strip(break_ecb_byte_by_byte(self.oracle_context))
         self.assertEqual(plain_text, self.oracle_context["secret"])
 
 if __name__ == '__main__':

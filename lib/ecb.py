@@ -109,4 +109,3 @@ def break_ecb_byte_by_byte(oracle_context):
                                       reference_cipher_text, broken_bytes, block, block_size)
 
     return broken_bytes
-
