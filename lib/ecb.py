@@ -87,7 +87,7 @@ def break_ecb(oracle_context, position, known_text: bytes,
 
         if (char > 32) and (display_output):
             last_bytes = len(prefix) - 16
-            prompt = "  decrypting: "
+            prompt = "  * decrypting: "
             print(prompt + prefix[last_bytes:].decode("ASCII").encode("unicode_escape").decode("ASCII") + "     ", end="\r")
             time.sleep(0.0005)
 
