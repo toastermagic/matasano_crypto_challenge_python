@@ -89,7 +89,7 @@ def break_ecb(oracle_context, position, known_text: bytes,
             last_bytes = len(prefix) - 16
             prompt = "  * decrypting: "
             print(prompt + prefix[last_bytes:].decode("ASCII").encode("unicode_escape").decode("ASCII") + "     ", end="\r")
-            time.sleep(0.0005)
+            time.sleep(0.003)
 
         encrypted_data = encryption_oracle(oracle_context, prefix)
 
