@@ -51,115 +51,54 @@
 #
 # f. Repeat for the next byte.
 
-
-# example decryption for: SECRET FOREST ORANGE
-#
-# first iteration:
-#
-# encrypt(<known text> | secret | padding) <- block -1
-# iterate through every byte until byte is found
-# change "known text"
-# 
-#
-# AAAAAS ECRETF ORESTO RANGEP <= first target_cipher
-#
-# AAAASE CRETFO RESTOR ANGEPP
-# AAASEC RETFOR ESTORA NGEPPP
-# AASECR ETFORE STORAN GEPPPP
-# ASECRE TFORES TORANG EPPPPP
-# SECRET FOREST ORANGE PPPPPP
-#
-# XXXXXX
-#    ^- target block
-#
-# second iteration:
-#
-# SECRET AAAAAT ORANGE PPPPPP <= first target_cipher
-#
-# SECRET AAAAST ORANGE PPPPPP
-# SECRET AAAEST ORANGE PPPPPP
-# SECRET AAREST ORANGE PPPPPP
-# SECRET AOREST ORANGE PPPPPP
-# SECRET FOREST ORANGE PPPPPP
-#
-#        XXXXXX
-#           ^- target block
-#
-# third iteration:
-#
-# SECRET FOREST AAAAAE PPPPPP <= first target_cipher
-#
-# SECRET FOREST AAAAGE PPPPPP
-# SECRET FOREST AAANGE PPPPPP
-# SECRET FOREST AAANGE PPPPPP
-# SECRET FOREST ARANGE PPPPPP
-# SECRET FOREST ORANGE PPPPPP
-#
-#               XXXXXX
-#                  ^- target block
-
-
-
 import sys
 sys.path.append('../lib')
 
 import unittest
 import time
-from base64 import *
+import re
 from pprint import pprint
 from random import randint
-import re
+from base64 import *
 from padding import *
 from ecb import *
 from key import *
+from oracle import *
 
 
 class TestChallenge4(unittest.TestCase):
-    SECRET = b64decode("Um9sbGluJyBpbiBteSA1LjAKV2l0aCBteSByYWctdG9wIGRvd24gc28gbXkg" \
+    secret = b64decode("Um9sbGluJyBpbiBteSA1LjAKV2l0aCBteSByYWctdG9wIGRvd24gc28gbXkg" \
            + "aGFpciBjYW4gYmxvdwpUaGUgZ2lybGllcyBvbiBzdGFuZGJ5IHdhdmluZyBq" \
            + "dXN0IHRvIHNheSBoaQpEaWQgeW91IHN0b3A/IE5vLCBJIGp1c3QgZHJvdmUg" \
            + "YnkK")
 
     # consistent but *unknown* key
     with open("../set2/data/12-key.txt", encoding="ISO-8859-1") as file:
-        KEY = b64decode(file.read())
+        key = b64decode(file.read())
+
+    oracle_context = {
+        "key": key,
+        "secret": secret
+    }
 
     def test_challenge4(self):
         block_size = 16
 
         broken_bytes = ""
 
-        block_count = int(len(b"a" * block_size + pad(SECRET, len(KEY))) / block_size)
+        block_count = int(len(b"a" * block_size + pad(self.secret, block_size)) / block_size)
 
         for block in range(0, block_count):
             # 15..0
             for position in range(block_size - 1, -1, -1):
                 known_text = b"A" * position
 
-                reference_cipher_text = encryption_oracle(known_text)
+                reference_cipher_text = encryption_oracle(self.oracle_context, known_text)
 
-                broken_bytes += break_ecb(position, known_text, reference_cipher_text, broken_bytes, block, block_size)
+                broken_bytes += break_ecb(self.oracle_context, position, known_text,
+                        reference_cipher_text, broken_bytes, block, block_size)
 
         print(broken_bytes)
-
-def break_ecb(position, known_text: bytes, reference_cipher_text, broken_bytes, block, block_size):
-    for char in range(0, 127):
-        prefix = known_text + broken_bytes.encode("ASCII") + chr(char).encode("ASCII")
-
-        encrypted_data = encryption_oracle(prefix)
-
-        offset = block_size + (block * block_size)
-
-        if encrypted_data[0:offset] == reference_cipher_text[0:offset]:
-            return chr(char)
-
-    return ""
-
-
-def encryption_oracle(plain_text: bytes) -> bytes:
-    cipher = AES.new(KEY, AES.MODE_ECB)
-    padded_plain_text = pad(plain_text + SECRET, len(KEY))
-    return cipher.encrypt(padded_plain_text)
 
 if __name__ == '__main__':
     unittest.main()
