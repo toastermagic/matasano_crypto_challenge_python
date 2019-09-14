@@ -81,24 +81,13 @@ class TestChallenge4(unittest.TestCase):
         "secret": secret
     }
 
+    def test_ecb_blocksize(self):
+        # FIXME: write this
+        True
+
     def test_challenge4(self):
-        block_size = 16
-
-        broken_bytes = ""
-
-        block_count = int(len(b"a" * block_size + pad(self.secret, block_size)) / block_size)
-
-        for block in range(0, block_count):
-            # 15..0
-            for position in range(block_size - 1, -1, -1):
-                known_text = b"A" * position
-
-                reference_cipher_text = encryption_oracle(self.oracle_context, known_text)
-
-                broken_bytes += break_ecb(self.oracle_context, position, known_text,
-                                          reference_cipher_text, broken_bytes, block, block_size)
-
-        print(broken_bytes)
+        plain_text = break_ecb_byte_by_byte(self.oracle_context)
+        self.assertEqual(plain_text, self.oracle_context["secret"])
 
 if __name__ == '__main__':
     unittest.main()

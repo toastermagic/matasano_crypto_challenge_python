@@ -7,7 +7,7 @@ def pad_strip(message):
     return message[:- padding_length]
 
 # PKCS #7 RFC: https://tools.ietf.org/html/rfc2315#section-10.3
-def pad(message, block_length):
+def pad(message: bytes, block_length) -> bytes:
     message_length = len(message)
 
     if block_length > 255:

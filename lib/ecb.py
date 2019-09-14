@@ -80,14 +80,33 @@ def detect_ecb(collection, block_size):
 
 def break_ecb(oracle_context, position, known_text: bytes, reference_cipher_text, broken_bytes, block, block_size):
     for char in range(0, 127):
-        prefix = known_text + broken_bytes.encode("ASCII") + chr(char).encode("ASCII")
+        prefix = known_text + broken_bytes + chr(char).encode("ASCII")
 
         encrypted_data = encryption_oracle(oracle_context, prefix)
 
         offset = block_size + (block * block_size)
 
         if encrypted_data[0:offset] == reference_cipher_text[0:offset]:
-            return chr(char)
+            return chr(char).encode("ASCII")
 
-    return ""
+    return b""
+
+def break_ecb_byte_by_byte(oracle_context):
+    block_size = 16
+
+    broken_bytes = b""
+
+    block_count = int(len(b"a" * block_size + pad(oracle_context["secret"], block_size)) / block_size)
+
+    for block in range(0, block_count):
+        # 15..0
+        for position in range(block_size - 1, -1, -1):
+            known_text = b"A" * position
+
+            reference_cipher_text = encryption_oracle(oracle_context, known_text)
+
+            broken_bytes += break_ecb(oracle_context, position, known_text,
+                                      reference_cipher_text, broken_bytes, block, block_size)
+
+    return broken_bytes
 
