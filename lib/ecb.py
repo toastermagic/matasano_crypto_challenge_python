@@ -5,6 +5,7 @@ from padding import *
 from iteration_utilities import grouper
 from xor import xor
 from results import *
+from oracle import *
 
 def decrypt_ecb_cbc(cipher_text, key, iv):
     block_length = len(key)
@@ -76,3 +77,17 @@ def detect_ecb(collection, block_size):
         })
 
     return likely_ecb_texts
+
+def break_ecb(oracle_context, position, known_text: bytes, reference_cipher_text, broken_bytes, block, block_size):
+    for char in range(0, 127):
+        prefix = known_text + broken_bytes.encode("ASCII") + chr(char).encode("ASCII")
+
+        encrypted_data = encryption_oracle(oracle_context, prefix)
+
+        offset = block_size + (block * block_size)
+
+        if encrypted_data[0:offset] == reference_cipher_text[0:offset]:
+            return chr(char)
+
+    return ""
+

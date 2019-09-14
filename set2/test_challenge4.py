@@ -96,7 +96,7 @@ class TestChallenge4(unittest.TestCase):
                 reference_cipher_text = encryption_oracle(self.oracle_context, known_text)
 
                 broken_bytes += break_ecb(self.oracle_context, position, known_text,
-                        reference_cipher_text, broken_bytes, block, block_size)
+                                          reference_cipher_text, broken_bytes, block, block_size)
 
         print(broken_bytes)
 
