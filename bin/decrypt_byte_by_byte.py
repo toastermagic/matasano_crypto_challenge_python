@@ -5,11 +5,8 @@
 import sys
 sys.path.append('../lib')
 
-import unittest
 import time
 import re
-from pprint import pprint
-from random import randint
 from base64 import *
 from ecb import *
 
