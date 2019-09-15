@@ -6,4 +6,5 @@ test:
 	@for dir in $(SUBDIRS); do make -C $$dir; done
 
 depends:
-	@pip install iteration_utilities pycrypto
+	@pip install iteration_utilities pycryptodome
+./
